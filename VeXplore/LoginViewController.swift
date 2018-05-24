@@ -94,6 +94,7 @@ class LoginViewController: SwipeTransitionViewController, UIWebViewDelegate
         let usernamesSript = "document.querySelectorAll(\"a[href^='/member/']\")[0].href.split('/').pop()"
         if let isLogin = contentWebView.stringByEvaluatingJavaScript(from: notificationsSript)?.boolValue,
             isLogin == true,
+            !(contentWebView.request?.url?.absoluteString.hasSuffix("/2fa"))!,
             let username = contentWebView.stringByEvaluatingJavaScript(from: usernamesSript),
             username.count > 0
         {
